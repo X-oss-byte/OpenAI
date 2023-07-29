@@ -1,0 +1,829 @@
+OpenAIChat
+
+Wrapper around OpenAI large language models that use the Chat endpoint.
+
+To use you should have the openai package installed, with the OPENAI_API_KEY environment variable set.
+
+To use with Azure you should have the openai package installed, with the AZURE_OPENAI_API_KEY, AZURE_OPENAI_API_INSTANCE_NAME, AZURE_OPENAI_API_DEPLOYMENT_NAME and AZURE_OPENAI_API_VERSION environment variable set.
+
+Remarks​
+
+Any parameters that are valid to be passed to openai.createCompletion can be passed through modelKwargs, even if not explicitly available on this class.
+
+Hierarchy​
+
+LLM<OpenAIChatCallOptions>.OpenAIChat
+Implements​
+
+OpenAIChatInput
+AzureOpenAIInput
+Constructors​
+
+constructor()​
+
+new OpenAIChat(fields?: Partial<OpenAIChatInput> & Partial<AzureOpenAIInput> & BaseLLMParams & {configuration?: ConfigurationParameters;}, configuration?: ConfigurationParameters): OpenAIChat
+Parameters​
+Parameter	Type	Description
+fields?	Partial<OpenAIChatInput> & Partial<AzureOpenAIInput> & BaseLLMParams & {configuration?: ConfigurationParameters;}	-
+configuration?	ConfigurationParameters	Deprecated
+
+Returns​
+OpenAIChat
+
+Overrides​
+LLM.constructor
+
+Defined in​
+langchain/src/llms/openai-chat.ts:127
+
+Properties​
+
+CallOptions​
+
+CallOptions: OpenAIChatCallOptions
+Inherited from​
+LLM.CallOptions
+
+Defined in​
+langchain/src/base_language/index.ts:108 langchain/src/base_language/index.ts:115
+
+ParsedCallOptions​
+
+ParsedCallOptions: Omit<OpenAIChatCallOptions, never>
+Inherited from​
+LLM.ParsedCallOptions
+
+Defined in​
+langchain/src/llms/base.ts:49
+
+caller​
+
+caller: AsyncCaller
+The async caller should be used by subclasses to make any async calls, which will thus benefit from the concurrency and retry logic.
+
+Inherited from​
+LLM.caller
+
+Defined in​
+langchain/src/base_language/index.ts:128
+
+frequencyPenalty​
+
+frequencyPenalty: number = 0
+Penalizes repeated tokens according to frequency
+
+Implementation of​
+OpenAIChatInput.frequencyPenalty
+
+Defined in​
+langchain/src/llms/openai-chat.ts:89
+
+lc_kwargs​
+
+lc_kwargs: SerializedFields
+Inherited from​
+LLM.lc_kwargs
+
+Defined in​
+langchain/src/load/serializable.ts:57
+
+lc_namespace​
+
+lc_namespace: string[]
+A path to the module that contains the class, eg. ["langchain", "llms"] Usually should be the same as the entrypoint the class is exported from.
+
+Inherited from​
+LLM.lc_namespace
+
+Defined in​
+langchain/src/llms/base.ts:54
+
+lc_serializable​
+
+lc_serializable: boolean = true
+Overrides​
+LLM.lc_serializable
+
+Defined in​
+langchain/src/llms/openai-chat.ts:65
+
+modelName​
+
+modelName: string = "gpt-3.5-turbo"
+Model name to use
+
+Implementation of​
+OpenAIChatInput.modelName
+
+Defined in​
+langchain/src/llms/openai-chat.ts:99
+
+n​
+
+n: number = 1
+Number of completions to generate for each prompt
+
+Implementation of​
+OpenAIChatInput.n
+
+Defined in​
+langchain/src/llms/openai-chat.ts:93
+
+presencePenalty​
+
+presencePenalty: number = 0
+Penalizes repeated tokens
+
+Implementation of​
+OpenAIChatInput.presencePenalty
+
+Defined in​
+langchain/src/llms/openai-chat.ts:91
+
+streaming​
+
+streaming: boolean = false
+Whether to stream the results or not. Enabling disables tokenUsage reporting
+
+Implementation of​
+OpenAIChatInput.streaming
+
+Defined in​
+langchain/src/llms/openai-chat.ts:109
+
+temperature​
+
+temperature: number = 1
+Sampling temperature to use
+
+Implementation of​
+OpenAIChatInput.temperature
+
+Defined in​
+langchain/src/llms/openai-chat.ts:85
+
+topP​
+
+topP: number = 1
+Total probability mass of tokens to consider at each step
+
+Implementation of​
+OpenAIChatInput.topP
+
+Defined in​
+langchain/src/llms/openai-chat.ts:87
+
+verbose​
+
+verbose: boolean
+Whether to print out response text.
+
+Inherited from​
+LLM.verbose
+
+Defined in​
+langchain/src/base_language/index.ts:44
+
+azureOpenAIApiDeploymentName?​
+
+azureOpenAIApiDeploymentName: string
+Azure OpenAI API deployment name to use for completions when making requests to Azure OpenAI. This is the name of the deployment you created in the Azure portal. e.g. "my-openai-deployment" this will be used in the endpoint URL: https://{InstanceName}.openai.azure.com/openai/deployments/my-openai-deployment/
+
+Implementation of​
+AzureOpenAIInput.azureOpenAIApiDeploymentName
+
+Defined in​
+langchain/src/llms/openai-chat.ts:119
+
+azureOpenAIApiInstanceName?​
+
+azureOpenAIApiInstanceName: string
+Azure OpenAI API instance name to use when making requests to Azure OpenAI. this is the name of the instance you created in the Azure portal. e.g. "my-openai-instance" this will be used in the endpoint URL: https://my-openai-instance.openai.azure.com/openai/deployments/{DeploymentName}/
+
+Implementation of​
+AzureOpenAIInput.azureOpenAIApiInstanceName
+
+Defined in​
+langchain/src/llms/openai-chat.ts:117
+
+azureOpenAIApiKey?​
+
+azureOpenAIApiKey: string
+API key to use when making requests to Azure OpenAI.
+
+Implementation of​
+AzureOpenAIInput.azureOpenAIApiKey
+
+Defined in​
+langchain/src/llms/openai-chat.ts:115
+
+azureOpenAIApiVersion?​
+
+azureOpenAIApiVersion: string
+API version to use when making requests to Azure OpenAI.
+
+Implementation of​
+AzureOpenAIInput.azureOpenAIApiVersion
+
+Defined in​
+langchain/src/llms/openai-chat.ts:113
+
+azureOpenAIBasePath?​
+
+azureOpenAIBasePath: string
+Custom endpoint for Azure OpenAI API. This is useful in case you have a deployment in another region. e.g. setting this value to "https://westeurope.api.cognitive.microsoft.com/openai/deployments" will be result in the endpoint URL: https://westeurope.api.cognitive.microsoft.com/openai/deployments/{DeploymentName}/
+
+Implementation of​
+AzureOpenAIInput.azureOpenAIBasePath
+
+Defined in​
+langchain/src/llms/openai-chat.ts:121
+
+cache?​
+
+cache: BaseCache<Generation[]>
+Inherited from​
+LLM.cache
+
+Defined in​
+langchain/src/llms/base.ts:56
+
+callbacks?​
+
+callbacks: Callbacks
+Inherited from​
+LLM.callbacks
+
+Defined in​
+langchain/src/base_language/index.ts:46
+
+logitBias?​
+
+logitBias: Record<string, number>
+Dictionary used to adjust the probability of specific tokens being generated
+
+Implementation of​
+OpenAIChatInput.logitBias
+
+Defined in​
+langchain/src/llms/openai-chat.ts:95
+
+maxTokens?​
+
+maxTokens: number
+Maximum number of tokens to generate in the completion. -1 returns as many tokens as possible given the prompt and the model's maximum context size.
+
+Implementation of​
+OpenAIChatInput.maxTokens
+
+Defined in​
+langchain/src/llms/openai-chat.ts:97
+
+metadata?​
+
+metadata: Record<string, unknown>
+Inherited from​
+LLM.metadata
+
+Defined in​
+langchain/src/base_language/index.ts:50
+
+modelKwargs?​
+
+modelKwargs: Record<string, any>
+Holds any additional parameters that are valid to pass to openai.createCompletion that are not explicitly specified on this class.
+
+Implementation of​
+OpenAIChatInput.modelKwargs
+
+Defined in​
+langchain/src/llms/openai-chat.ts:103
+
+openAIApiKey?​
+
+openAIApiKey: string
+API key to use when making requests to OpenAI. Defaults to the value of OPENAI_API_KEY environment variable.
+
+Implementation of​
+OpenAIChatInput.openAIApiKey
+
+Defined in​
+langchain/src/llms/openai-chat.ts:111
+
+prefixMessages?​
+
+prefixMessages: ChatCompletionRequestMessage[]
+ChatGPT messages to pass as a prefix to the prompt
+
+Implementation of​
+OpenAIChatInput.prefixMessages
+
+Defined in​
+langchain/src/llms/openai-chat.ts:101
+
+stop?​
+
+stop: string[]
+List of stop words to use when generating
+
+Implementation of​
+OpenAIChatInput.stop
+
+Defined in​
+langchain/src/llms/openai-chat.ts:107
+
+tags?​
+
+tags: string[]
+Inherited from​
+LLM.tags
+
+Defined in​
+langchain/src/base_language/index.ts:48
+
+timeout?​
+
+timeout: number
+Timeout to use when making requests to OpenAI.
+
+Implementation of​
+OpenAIChatInput.timeout
+
+Defined in​
+langchain/src/llms/openai-chat.ts:105
+
+Accessors​
+
+callKeys​
+
+Keys that the language model accepts as call options.
+
+callKeys(): keyof OpenAIChatCallOptions[]
+Returns​
+keyof OpenAIChatCallOptions[]
+
+Overrides​
+LLM.callKeys
+
+Defined in​
+langchain/src/llms/openai-chat.ts:57
+
+Overrides​
+LLM.callKeys
+
+Defined in​
+langchain/src/llms/openai-chat.ts:57
+
+lc_aliases​
+
+A map of aliases for constructor args. Keys are the attribute names, e.g. "foo". Values are the alias that will replace the key in serialization. This is used to eg. make argument names match Python.
+
+lc_aliases(): Record<string, string>
+Returns​
+Record<string, string>
+
+Overrides​
+LLM.lc_aliases
+
+Defined in​
+langchain/src/llms/openai-chat.ts:74
+
+Overrides​
+LLM.lc_aliases
+
+Defined in​
+langchain/src/llms/openai-chat.ts:74
+
+lc_attributes​
+
+lc_attributes(): undefined | {}
+Returns​
+undefined | {}
+
+Inherited from​
+LLM.lc_attributes
+
+Defined in​
+langchain/src/base_language/index.ts:52
+
+Inherited from​
+LLM.lc_attributes
+
+Defined in​
+langchain/src/base_language/index.ts:52
+
+lc_secrets​
+
+A map of secrets, which will be omitted from serialization. Keys are paths to the secret in constructor args, e.g. "foo.bar.baz". Values are the secret ids, which will be used when deserializing.
+
+lc_secrets(): undefined | {}
+Returns​
+undefined | {}
+
+Overrides​
+LLM.lc_secrets
+
+Defined in​
+langchain/src/llms/openai-chat.ts:67
+
+Overrides​
+LLM.lc_secrets
+
+Defined in​
+langchain/src/llms/openai-chat.ts:67
+
+Methods​
+
+_flattenLLMResult()​
+
+_flattenLLMResult(llmResult: LLMResult): LLMResult[]
+Parameters​
+Parameter	Type
+llmResult	LLMResult
+Returns​
+LLMResult[]
+
+Inherited from​
+LLM._flattenLLMResult
+
+Defined in​
+langchain/src/llms/base.ts:199
+
+_generate()​
+
+Run the LLM on the given prompts and input.
+
+_generate(prompts: string[], options: Omit<OpenAIChatCallOptions, never>, runManager?: CallbackManagerForLLMRun): Promise<LLMResult>
+Parameters​
+Parameter	Type
+prompts	string[]
+options	Omit<OpenAIChatCallOptions, never>
+runManager?	CallbackManagerForLLMRun
+Returns​
+Promise<LLMResult>
+
+Inherited from​
+LLM._generate
+
+Defined in​
+langchain/src/llms/base.ts:437
+
+_llmType()​
+
+Return the string type key uniquely identifying this class of LLM.
+
+_llmType(): string
+Returns​
+string
+
+Overrides​
+LLM._llmType
+
+Defined in​
+langchain/src/llms/openai-chat.ts:533
+
+_modelType()​
+
+_modelType(): string
+Returns​
+string
+
+Inherited from​
+LLM._modelType
+
+Defined in​
+langchain/src/llms/base.ts:396
+
+_streamIterator()​
+
+_streamIterator(input: BaseLanguageModelInput, options?: OpenAIChatCallOptions): AsyncGenerator<string, any, unknown>
+Parameters​
+Parameter	Type
+input	BaseLanguageModelInput
+options?	OpenAIChatCallOptions
+Returns​
+AsyncGenerator<string, any, unknown>
+
+Inherited from​
+LLM._streamIterator
+
+Defined in​
+langchain/src/llms/base.ts:102
+
+_streamResponseChunks()​
+
+_streamResponseChunks(prompt: string, options: Omit<OpenAIChatCallOptions, never>, runManager?: CallbackManagerForLLMRun): AsyncGenerator<GenerationChunk, any, unknown>
+Parameters​
+Parameter	Type
+prompt	string
+options	Omit<OpenAIChatCallOptions, never>
+runManager?	CallbackManagerForLLMRun
+Returns​
+AsyncGenerator<GenerationChunk, any, unknown>
+
+Overrides​
+LLM._streamResponseChunks
+
+Defined in​
+langchain/src/llms/openai-chat.ts:259
+
+batch()​
+
+batch(inputs: BaseLanguageModelInput[], options?: OpenAIChatCallOptions | OpenAIChatCallOptions[], batchOptions?: object): Promise<string[]>
+Parameters​
+Parameter	Type
+inputs	BaseLanguageModelInput[]
+options?	OpenAIChatCallOptions | OpenAIChatCallOptions[]
+batchOptions?	object
+batchOptions.maxConcurrency?	number
+Returns​
+Promise<string[]>
+
+Inherited from​
+LLM.batch
+
+Defined in​
+langchain/src/schema/runnable.ts:29
+
+call()​
+
+Convenience wrapper for generate that takes in a single string prompt and returns a single string output.
+
+call(prompt: string, options?: string[] | OpenAIChatCallOptions, callbacks?: Callbacks): Promise<string>
+Parameters​
+Parameter	Type
+prompt	string
+options?	string[] | OpenAIChatCallOptions
+callbacks?	Callbacks
+Returns​
+Promise<string>
+
+Inherited from​
+LLM.call
+
+Defined in​
+langchain/src/llms/base.ts:345
+
+generate()​
+
+Run the LLM on the given prompts and input, handling caching.
+
+generate(prompts: string[], options?: string[] | OpenAIChatCallOptions, callbacks?: Callbacks): Promise<LLMResult>
+Parameters​
+Parameter	Type
+prompts	string[]
+options?	string[] | OpenAIChatCallOptions
+callbacks?	Callbacks
+Returns​
+Promise<LLMResult>
+
+Inherited from​
+LLM.generate
+
+Defined in​
+langchain/src/llms/base.ts:282
+
+generatePrompt()​
+
+generatePrompt(promptValues: BasePromptValue[], options?: string[] | OpenAIChatCallOptions, callbacks?: Callbacks): Promise<LLMResult>
+Parameters​
+Parameter	Type
+promptValues	BasePromptValue[]
+options?	string[] | OpenAIChatCallOptions
+callbacks?	Callbacks
+Returns​
+Promise<LLMResult>
+
+Inherited from​
+LLM.generatePrompt
+
+Defined in​
+langchain/src/llms/base.ts:171
+
+getNumTokens()​
+
+getNumTokens(text: string): Promise<number>
+Parameters​
+Parameter	Type
+text	string
+Returns​
+Promise<number>
+
+Inherited from​
+LLM.getNumTokens
+
+Defined in​
+langchain/src/base_language/index.ts:166
+
+identifyingParams()​
+
+Get the identifying parameters for the model
+
+identifyingParams(): object
+Returns​
+object
+
+Member	Type
+model_name	string
+Defined in​
+langchain/src/llms/openai-chat.ts:241
+
+invocationParams()​
+
+Get the parameters used to invoke the model
+
+invocationParams(options?: Omit<OpenAIChatCallOptions, never>): Omit<CreateChatCompletionRequest, "messages">
+Parameters​
+Parameter	Type
+options?	Omit<OpenAIChatCallOptions, never>
+Returns​
+Omit<CreateChatCompletionRequest, "messages">
+
+Overrides​
+LLM.invocationParams
+
+Defined in​
+langchain/src/llms/openai-chat.ts:211
+
+invoke()​
+
+invoke(input: BaseLanguageModelInput, options?: OpenAIChatCallOptions): Promise<string>
+Parameters​
+Parameter	Type
+input	BaseLanguageModelInput
+options?	OpenAIChatCallOptions
+Returns​
+Promise<string>
+
+Inherited from​
+LLM.invoke
+
+Defined in​
+langchain/src/llms/base.ts:69
+
+predict()​
+
+predict(text: string, options?: string[] | OpenAIChatCallOptions, callbacks?: Callbacks): Promise<string>
+Parameters​
+Parameter	Type
+text	string
+options?	string[] | OpenAIChatCallOptions
+callbacks?	Callbacks
+Returns​
+Promise<string>
+
+Inherited from​
+LLM.predict
+
+Defined in​
+langchain/src/llms/base.ts:354
+
+predictMessages()​
+
+predictMessages(messages: BaseMessage[], options?: string[] | OpenAIChatCallOptions, callbacks?: Callbacks): Promise<BaseMessage>
+Parameters​
+Parameter	Type
+messages	BaseMessage[]
+options?	string[] | OpenAIChatCallOptions
+callbacks?	Callbacks
+Returns​
+Promise<BaseMessage>
+
+Inherited from​
+LLM.predictMessages
+
+Defined in​
+langchain/src/llms/base.ts:362
+
+serialize()​
+
+Return a json-like object representing this LLM.
+
+serialize(): SerializedLLM
+Returns​
+SerializedLLM
+
+Inherited from​
+LLM.serialize
+
+Defined in​
+langchain/src/llms/base.ts:388
+
+startStream()​
+
+startStream(request: CreateChatCompletionRequest, options?: StreamingAxiosConfiguration): object
+Parameters​
+Parameter	Type
+request	CreateChatCompletionRequest
+options?	StreamingAxiosConfiguration
+Returns​
+object
+
+Member	Type
+[asyncIterator]	Method [asyncIterator]
+next	Method next
+Defined in​
+langchain/src/llms/openai-chat.ts:298
+
+stream()​
+
+stream(input: BaseLanguageModelInput, options?: OpenAIChatCallOptions): Promise<IterableReadableStream<string>>
+Parameters​
+Parameter	Type
+input	BaseLanguageModelInput
+options?	OpenAIChatCallOptions
+Returns​
+Promise<IterableReadableStream<string>>
+
+Inherited from​
+LLM.stream
+
+Defined in​
+langchain/src/schema/runnable.ts:62
+
+toJSON()​
+
+toJSON(): Serialized
+Returns​
+Serialized
+
+Inherited from​
+LLM.toJSON
+
+Defined in​
+langchain/src/load/serializable.ts:98
+
+toJSONNotImplemented()​
+
+toJSONNotImplemented(): SerializedNotImplemented
+Returns​
+SerializedNotImplemented
+
+Inherited from​
+LLM.toJSONNotImplemented
+
+Defined in​
+langchain/src/load/serializable.ts:151
+
+deserialize()​
+
+Load an LLM from a json-like object describing it.
+
+Static deserialize(data: SerializedLLM): Promise<BaseLLM<BaseLLMCallOptions>>
+Parameters​
+Parameter	Type
+data	SerializedLLM
+Returns​
+Promise<BaseLLM<BaseLLMCallOptions>>
+
+Inherited from​
+LLM.deserialize
+
+Defined in​
+langchain/src/llms/base.ts:403
+
+_getOptionsList()​
+
+Protected _getOptionsList(options: OpenAIChatCallOptions | OpenAIChatCallOptions[], length: number = 0): OpenAIChatCallOptions[]
+Parameters​
+Parameter	Type	Default value
+options	OpenAIChatCallOptions | OpenAIChatCallOptions[]	undefined
+length	number	0
+Returns​
+OpenAIChatCallOptions[]
+
+Inherited from​
+LLM._getOptionsList
+
+Defined in​
+langchain/src/schema/runnable.ts:14
+
+_separateRunnableConfigFromCallOptions()​
+
+Protected _separateRunnableConfigFromCallOptions(options: OpenAIChatCallOptions): [BaseCallbackConfig, Omit<OpenAIChatCallOptions, never>]
+Parameters​
+Parameter	Type
+options	OpenAIChatCallOptions
+Returns​
+[BaseCallbackConfig, Omit<OpenAIChatCallOptions, never>]
+
+Inherited from​
+LLM._separateRunnableConfigFromCallOptions
+
+Defined in​
+langchain/src/llms/base.ts:91
+
+_convertInputToPromptValue()​
+
+Static Protected _convertInputToPromptValue(input: BaseLanguageModelInput): BasePromptValue
+Parameters​
+Parameter	Type
+input	BaseLanguageModelInput
+Returns​
+BasePromptValue
+
+Inherited from​
+LLM._convertInputToPromptValue
+
+Defined in​
+langchain/src/base_language/index.ts:192
